@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -159,9 +161,9 @@ public class StudentController {
 	}
 	
 	@PostMapping("/saveStudentUsingRequestBody")
-	public Student saveStudentUsingRequestBody(@RequestBody Student s1)
+	public ResponseEntity<?> saveStudentUsingRequestBody(@RequestBody Student s1)
 	{		
-		return studentService.saveStudent(s1);
+		return new ResponseEntity<>(studentService.saveStudent(s1),HttpStatus.CREATED);
 	}
 }
 

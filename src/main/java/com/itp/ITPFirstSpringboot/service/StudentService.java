@@ -31,5 +31,11 @@ public class StudentService {
 	public List<Student> getStudentBornBefore(LocalDate bdate) {
 		return studentRepository.findByDobBefore(bdate);
 	}
+	public List<Student> getStudentByPercentage(double percentage) {
+		return studentRepository.findByPercentageGreaterThanEqual(percentage);
+	}
+	public List<Student> getStudentsByCompanyName(String companyName) {
+		return studentRepository.findByEmailContaining(companyName);
+	}
 
 }

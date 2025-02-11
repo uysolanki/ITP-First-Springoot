@@ -229,6 +229,32 @@ public class StudentController {
 		return new ResponseEntity<String>("Error Generated" + e.getMessage(),HttpStatus.BAD_REQUEST);	
 		}
 	}
+	
+	@GetMapping("/getStudentByPercentage/{percentage}")
+	public ResponseEntity<?> getStudentByPercentage(@PathVariable double percentage)
+	{
+		try
+		{
+		return new ResponseEntity<List<Student>>(studentService.getStudentByPercentage(percentage),HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+		return new ResponseEntity<String>("Error Generated" + e.getMessage(),HttpStatus.BAD_REQUEST);	
+		}
+	}
+	
+	@GetMapping("/getStudentsByCompanyName/{companyName}")
+	public ResponseEntity<?> getStudentsByCompanyName(@PathVariable String companyName)
+	{
+		try
+		{
+		return new ResponseEntity<List<Student>>(studentService.getStudentsByCompanyName(companyName),HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+		return new ResponseEntity<String>("Error Generated" + e.getMessage(),HttpStatus.BAD_REQUEST);	
+		}
+	}
 }
 
 //Http

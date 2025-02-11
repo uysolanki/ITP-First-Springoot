@@ -20,7 +20,7 @@ public class Player {
 	private String pname;
 	
 	@NotNull(message = "RunsScored cannot be null")
-	@Positive
+	@Positive(message = "RunsScored cannot be negative")
 	private int rs;
 	
 	public Player() {}

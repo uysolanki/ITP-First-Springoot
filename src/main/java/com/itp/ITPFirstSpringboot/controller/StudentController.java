@@ -1,11 +1,13 @@
 package com.itp.ITPFirstSpringboot.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,15 +33,20 @@ public class StudentController {
 	@RequestMapping("/getStudent")
 	public Student getStudent()
 	{
-		Student s1=new Student();
-		s1.setAge(21);
-		s1.setEmail("alice@gmail.com");
-		s1.setFirstName("Alice");
-		s1.setGender("female");
-		s1.setLastName("Fernandes");
-		s1.setPercentage(78.5);
-		s1.setRno(101);
+//		Student s1=new Student();
+//		s1.setAge(21);
+//		s1.setEmail("alice@gmail.com");
+//		s1.setFirstName("Alice");
+//		s1.setGender("female");
+//		s1.setLastName("Fernandes");
+//		s1.setPercentage(78.5);
+//		s1.setRno(101);
 		
+		Student s1=Student.builder()
+				.age(24)
+				.email("alice@gmail.com")
+				.firstName("Alice")
+				.build();
 		return s1;
 	}
 	
@@ -163,11 +170,68 @@ public class StudentController {
 	@PostMapping("/saveStudentUsingRequestBody")
 	public ResponseEntity<?> saveStudentUsingRequestBody(@RequestBody Student s1)
 	{		
-		return new ResponseEntity<>(studentService.saveStudent(s1),HttpStatus.CREATED);
+			try {
+				return new ResponseEntity<Student>(studentService.saveStudent(s1),HttpStatus.CREATED);
+			} catch (Exception e) {
+				return new ResponseEntity<String>("Error adding record: " + e.getMessage(),HttpStatus.BAD_REQUEST);
+			}
+	}
+	
+	@GetMapping("/getAllStudents")
+	public ResponseEntity<?> getAllStudents()
+	{
+		try
+		{
+		return new ResponseEntity<List<Student>>(studentService.getAllStudents(),HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+		return new ResponseEntity<String>("Error Generated" + e.getMessage(),HttpStatus.BAD_REQUEST);	
+		}
+	}
+	
+	@GetMapping("/getStudent/{rno}")
+	public ResponseEntity<?> getStudent(@PathVariable int rno)
+	{
+		try
+		{
+		return new ResponseEntity<Student>(studentService.getStudent(rno),HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+		return new ResponseEntity<String>("Error Generated" + e.getMessage(),HttpStatus.BAD_REQUEST);	
+		}
+	}
+	
+	@GetMapping("/getStudentByFirstName/{fname}")
+	public ResponseEntity<?> getStudentByFirstName(@PathVariable String fname)
+	{
+		try
+		{
+		return new ResponseEntity<List<Student>>(studentService.getStudentByFirstName(fname),HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+		return new ResponseEntity<String>("Error Generated" + e.getMessage(),HttpStatus.BAD_REQUEST);	
+		}
+	}
+	
+	@GetMapping("/getStudentBornBefore/{stringDate}")
+	public ResponseEntity<?> getStudentBornBefore(@PathVariable String stringDate)
+	{
+		    LocalDate date = LocalDate.parse(stringDate);
+		try
+		{
+		return new ResponseEntity<List<Student>>(studentService.getStudentBornBefore(date),HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+		return new ResponseEntity<String>("Error Generated" + e.getMessage(),HttpStatus.BAD_REQUEST);	
+		}
 	}
 }
 
-
+//Http
 
 /*
 {

@@ -2,7 +2,7 @@ package com.itp.ITPFirstSpringboot.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +36,34 @@ public class StudentService {
 	}
 	public List<Student> getStudentsByCompanyName(String companyName) {
 		return studentRepository.findByEmailContaining(companyName);
+	}
+	public void deleteStudent(int rno) {
+		studentRepository.deleteById(rno);	
+	}
+	public List<Student> saveAllStudents(List<Student> students) {
+		return studentRepository.saveAll(students);
+	}
+	public Student updateStudent(int rno, Student newDetails) {
+		Student studentFromDb=getStudent(rno);
+//		if(newDetails.getEmail()!=null)
+//		studentFromDb.setEmail(newDetails.getEmail());
+//		
+//		if((Integer)newDetails.getAge()!=null)
+//		studentFromDb.setAge(newDetails.getAge());
+//		
+//		if(newDetails.getFirstName()!=null)
+//		studentFromDb.setFirstName(newDetails.getFirstName());
+//		
+//		if(newDetails.getLastName()!=null)
+//		studentFromDb.setLastName(newDetails.getLastName());
+//		
+		
+		studentFromDb.setEmail(Objects.requireNonNullElse(newDetails.getEmail(),studentFromDb.getEmail()));
+		studentFromDb.setAge((Integer)Objects.requireNonNullElse(newDetails.getAge(),(Integer)studentFromDb.getAge()));
+		studentFromDb.setFirstName(Objects.requireNonNullElse(newDetails.getFirstName(),studentFromDb.getFirstName()));
+		studentFromDb.setLastName(Objects.requireNonNullElse(newDetails.getLastName(),studentFromDb.getLastName()));
+		
+		return saveStudent(studentFromDb);
 	}
 
 }

@@ -7,9 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -177,6 +179,17 @@ public class StudentController {
 			}
 	}
 	
+	
+	@PostMapping("/saveMultipleStudentUsingRequestBody")
+	public ResponseEntity<?> saveMultipleStudentUsingRequestBody(@RequestBody List<Student> students)
+	{		
+			try {
+				return new ResponseEntity<List<Student>>(studentService.saveAllStudents(students),HttpStatus.CREATED);
+			} catch (Exception e) {
+				return new ResponseEntity<String>("Error adding record: " + e.getMessage(),HttpStatus.BAD_REQUEST);
+			}
+	}
+	
 	@GetMapping("/getAllStudents")
 	public ResponseEntity<?> getAllStudents()
 	{
@@ -253,6 +266,26 @@ public class StudentController {
 		catch(Exception e)
 		{
 		return new ResponseEntity<String>("Error Generated" + e.getMessage(),HttpStatus.BAD_REQUEST);	
+		}
+	}
+	
+	@DeleteMapping("/deleteStudent/{rno}")
+	public String deleteStudent(@PathVariable int rno)
+	{
+		studentService.deleteStudent(rno);
+		return "Student Record Deleted";
+	}
+	
+	@PutMapping("/updateStudent/{rno}") //updateStudent/1
+	public ResponseEntity<?> updateStudent(@RequestBody Student newDetails,@PathVariable int rno)
+	{
+		try
+		{
+		return new ResponseEntity<Student>(studentService.updateStudent(rno,newDetails),HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+		return new ResponseEntity<String>("Error Generated" + e.fillInStackTrace(),HttpStatus.BAD_REQUEST);	
 		}
 	}
 }

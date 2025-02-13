@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.itp.ITPFirstSpringboot.entity.Student;
@@ -59,11 +60,14 @@ public class StudentService {
 //		
 		
 		studentFromDb.setEmail(Objects.requireNonNullElse(newDetails.getEmail(),studentFromDb.getEmail()));
-		studentFromDb.setAge((Integer)Objects.requireNonNullElse(newDetails.getAge(),(Integer)studentFromDb.getAge()));
+		studentFromDb.setAge(Objects.requireNonNullElse(newDetails.getAge(),0));
 		studentFromDb.setFirstName(Objects.requireNonNullElse(newDetails.getFirstName(),studentFromDb.getFirstName()));
 		studentFromDb.setLastName(Objects.requireNonNullElse(newDetails.getLastName(),studentFromDb.getLastName()));
 		
 		return saveStudent(studentFromDb);
+	}
+	public List<Student> getSortedStudent(String sortedFiled) {
+		return studentRepository.findAll(Sort.by(Sort.Direction.DESC, sortedFiled));	
 	}
 
 }

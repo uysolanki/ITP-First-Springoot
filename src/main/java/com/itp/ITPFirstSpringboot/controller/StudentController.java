@@ -288,6 +288,19 @@ public class StudentController {
 		return new ResponseEntity<String>("Error Generated" + e.fillInStackTrace(),HttpStatus.BAD_REQUEST);	
 		}
 	}
+	
+	@GetMapping("/getSortedStudent/{sortedFiled}")
+	public ResponseEntity<?> getSortedStudent(@PathVariable String sortedFiled)
+	{
+		try
+		{
+		return new ResponseEntity<List<Student>>(studentService.getSortedStudent(sortedFiled),HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+		return new ResponseEntity<String>("Error Generated" + e.getMessage(),HttpStatus.BAD_REQUEST);	
+		}
+	}
 }
 
 //Http

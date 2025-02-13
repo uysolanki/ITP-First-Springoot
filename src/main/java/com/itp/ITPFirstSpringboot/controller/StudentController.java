@@ -1,10 +1,12 @@
 package com.itp.ITPFirstSpringboot.controller;
 
+import java.awt.Paint;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -295,6 +297,34 @@ public class StudentController {
 		try
 		{
 		return new ResponseEntity<List<Student>>(studentService.getSortedStudent(sortedFiled),HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+		return new ResponseEntity<String>("Error Generated" + e.getMessage(),HttpStatus.BAD_REQUEST);	
+		}
+	}
+	
+	
+	@GetMapping("/getStudentByPagination/{pageNumer}/{pageSize}")
+	public ResponseEntity<?> getStudentByPagination(@PathVariable int pageNumer,@PathVariable int pageSize)
+	{
+		try
+		{
+		return new ResponseEntity<Page<Student>>(studentService.getStudentByPagination(pageNumer,pageSize),HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+		return new ResponseEntity<String>("Error Generated" + e.getMessage(),HttpStatus.BAD_REQUEST);	
+		}
+	}
+	
+	
+	@GetMapping("/getStudentBySortingAndPagination/{sortedFiled}/{pageNumer}/{pageSize}")
+	public ResponseEntity<?> getStudentBySortingAndPagination(@PathVariable int pageNumer,@PathVariable int pageSize, @PathVariable String sortedFiled)
+	{
+		try
+		{
+		return new ResponseEntity<Page<Student>>(studentService.getStudentBySortingAndPagination(sortedFiled,pageNumer,pageSize),HttpStatus.OK);
 		}
 		catch(Exception e)
 		{

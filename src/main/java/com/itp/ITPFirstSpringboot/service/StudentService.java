@@ -1,10 +1,13 @@
 package com.itp.ITPFirstSpringboot.service;
 
+import java.awt.Paint;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -67,7 +70,23 @@ public class StudentService {
 		return saveStudent(studentFromDb);
 	}
 	public List<Student> getSortedStudent(String sortedFiled) {
-		return studentRepository.findAll(Sort.by(Sort.Direction.DESC, sortedFiled));	
+		return studentRepository.findAll(Sort.by(
+				Sort.Order.asc(sortedFiled),
+				Sort.Order.asc("lastName")
+				));	
+		
+	}
+	public Page<Student> getStudentByPagination(int pageNumer, int pageSize) {
+		return studentRepository.findAll(
+				PageRequest.of(pageNumer, pageSize)
+				);
+				
+	}
+	public Page<Student> getStudentBySortingAndPagination(String sortedFiled, int pageNumer, int pageSize) {
+		return studentRepository.findAll(
+				PageRequest.of(pageNumer, pageSize)
+				.withSort(Sort.by(Sort.Direction.ASC,sortedFiled))
+				);
 	}
 
 }

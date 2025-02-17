@@ -1,14 +1,7 @@
 package com.itp.ITPFirstSpringboot.entity;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -18,12 +11,16 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -75,12 +72,12 @@ public class Student {
 	@Column(unique = true)
 	private String email;
 	
-	@CreatedDate 
-	@Column(name = "created_at") 
-	private Timestamp createdAt; 
-
-	@LastModifiedDate 
-	@Column(name = "modified_at") 
-	private Timestamp modifiedAt;
+//	@CreatedDate 
+//	@Column(name = "created_at") 
+//	private Timestamp createdAt; 
+//
+//	@LastModifiedDate 
+//	@Column(name = "modified_at") 
+//	private Timestamp modifiedAt;
 
 }

@@ -1,6 +1,5 @@
 package com.itp.ITPFirstSpringboot.controller;
 
-import java.awt.Paint;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itp.ITPFirstSpringboot.entity.Student;
 import com.itp.ITPFirstSpringboot.service.StudentService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 public class StudentController {
 	
 	@Autowired
 	StudentService studentService;
 
+	@Operation(summary = "Sample API", description = "Hello World")
 	@RequestMapping("/welcome")
 	public String welcome()
 	{
@@ -54,7 +56,7 @@ public class StudentController {
 		return s1;
 	}
 	
-	
+	@Operation(summary = "Get List Of all Students", description = "Get List of All Students")
 	@RequestMapping("/getStudentList")
 	public List<Student> getStudentList()
 	{

@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: ITPFirstSpringboot
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        format_sql: 'true'
+        show_sql: 'true'
+  datasource:
+    password: ''
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/itp1sbdb-dev
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html
+  jackson:
+    date-format: yyyy-MM-dd
+server:
+  port: '8088'

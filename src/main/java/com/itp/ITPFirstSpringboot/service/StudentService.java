@@ -1,10 +1,10 @@
 package com.itp.ITPFirstSpringboot.service;
 
-import java.awt.Paint;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +19,11 @@ public class StudentService {
 
 	@Autowired
 	StudentRepository studentRepository;
+	
+	private static final Logger logger=Logger.getLogger(StudentService.class);
+	
 	public Student saveStudent(Student s1) {
+		logger.info("Request Received By Service to Save Customer");
 		return studentRepository.save(s1);
 		
 	}

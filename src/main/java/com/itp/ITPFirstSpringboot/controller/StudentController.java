@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,8 @@ public class StudentController {
 	
 	@Autowired
 	StudentService studentService;
+	
+	private static final Logger logger=Logger.getLogger(StudentController.class);
 
 	@Operation(summary = "Sample API", description = "Hello World")
 	@RequestMapping("/welcome")
@@ -176,11 +179,14 @@ public class StudentController {
 	@PostMapping("/saveStudentUsingRequestBody")
 	public ResponseEntity<?> saveStudentUsingRequestBody(@RequestBody Student s1)
 	{		
+		logger.info("Request Received By Controller");    
 			try {
 				return new ResponseEntity<Student>(studentService.saveStudent(s1),HttpStatus.CREATED);
 			} catch (Exception e) {
 				return new ResponseEntity<String>("Error adding record: " + e.getMessage(),HttpStatus.BAD_REQUEST);
 			}
+		
+		
 	}
 	
 	
@@ -197,6 +203,7 @@ public class StudentController {
 	@GetMapping("/getAllStudents")
 	public ResponseEntity<?> getAllStudents()
 	{
+		logger.info("Request Received By Controller to Get All Students"); 
 		try
 		{
 		return new ResponseEntity<List<Student>>(studentService.getAllStudents(),HttpStatus.OK);

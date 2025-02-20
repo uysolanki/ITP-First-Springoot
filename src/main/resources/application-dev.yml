@@ -1,24 +1,38 @@
-spring:
-  application:
-    name: ITPFirstSpringboot
-  jpa:
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    properties:
-      hibernate:
-        format_sql: 'true'
-        show_sql: 'true'
-  datasource:
-    password: ''
-    driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    url: jdbc:mysql://localhost:3306/itp1sbdb-dev
-  mvc:
-    view:
-      prefix: /templates/
-      suffix: .html
-  jackson:
-    date-format: yyyy-MM-dd
-server:
-  port: '8088'
+#spring:
+#  application:
+#    name: ITPFirstSpringboot
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    properties:
+#      hibernate:
+#        format_sql: 'true'
+#        show_sql: 'true'
+#  datasource:
+#    password: ''
+#    driver-class-name: com.mysql.jdbc.Driver
+#    username: root
+#    url: jdbc:mysql://localhost:3306/itp1sbdb-dev
+#  mvc:
+#    view:
+#      prefix: /templates/
+#      suffix: .html
+#  jackson:
+#    date-format: yyyy-MM-dd
+#server:
+#  port: '8088'
+#info:
+#  project:
+#    instructor: Umar Solanki
+#    name: Student Service
+#    env: dev
+#    team: ITP
+#    contact: 8888111222
+#    contatcemail: alice@itp.com
+#management:
+#  endpoints:
+#    web:
+#      base-path: /app/health
+#      exposure:
+#        include: '*'

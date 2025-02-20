@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,13 +31,22 @@ public class StudentController {
 	@Autowired
 	StudentService studentService;
 	
+	
+	@Value("${server.port}")
+	int serverPort;
+	
+	
+	@Value("${info.project.instructor}")
+	String instructorName;
+	
+	
 	private static final Logger logger=Logger.getLogger(StudentController.class);
 
 	@Operation(summary = "Sample API", description = "Hello World")
 	@RequestMapping("/welcome")
 	public String welcome()
 	{
-		return "Welcome to ITP";
+		return "Welcome to "+instructorName;
 	}
 	
 	@RequestMapping("/getStudent")
@@ -179,10 +189,19 @@ public class StudentController {
 	@PostMapping("/saveStudentUsingRequestBody")
 	public ResponseEntity<?> saveStudentUsingRequestBody(@RequestBody Student s1)
 	{		
-		logger.info("Request Received By Controller");    
+		  logger.info("Request Received to Add Student " +s1.getFirstName());
+		  long st=System.currentTimeMillis();
 			try {
-				return new ResponseEntity<Student>(studentService.saveStudent(s1),HttpStatus.CREATED);
+				
+				Student student=studentService.saveStudent(s1);
+				long et=System.currentTimeMillis();
+				
+				logger.info("Student Added " +s1.getFirstName());
+				logger.info("Time taken to add Student " +(et-st) + " millisecs");
+				return new ResponseEntity<Student>(student,HttpStatus.CREATED);
+				
 			} catch (Exception e) {
+				logger.warn("Unable to Add Student " +s1.getFirstName() + e.getLocalizedMessage());
 				return new ResponseEntity<String>("Error adding record: " + e.getMessage(),HttpStatus.BAD_REQUEST);
 			}
 		
@@ -203,7 +222,7 @@ public class StudentController {
 	@GetMapping("/getAllStudents")
 	public ResponseEntity<?> getAllStudents()
 	{
-		logger.info("Request Received By Controller to Get All Students"); 
+		
 		try
 		{
 		return new ResponseEntity<List<Student>>(studentService.getAllStudents(),HttpStatus.OK);

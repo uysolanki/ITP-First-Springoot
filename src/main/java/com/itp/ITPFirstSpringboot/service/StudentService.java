@@ -20,10 +20,10 @@ public class StudentService {
 	@Autowired
 	StudentRepository studentRepository;
 	
-	private static final Logger logger=Logger.getLogger(StudentService.class);
+	private static final Logger logger=Logger.getLogger(StudentRepository.class);
 	
 	public Student saveStudent(Student s1) {
-		logger.info("Request Received By Service to Save Customer");
+		logger.info("Service method invoked to add Student " +s1.getFirstName());
 		return studentRepository.save(s1);
 		
 	}

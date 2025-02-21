@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Student Management System</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div class = "container">
+		<div class = "row">
+			<div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class = "text-center"> Update Student </h1>
+				<div class = "card-body">
+			         
+					
+					<form th:action="@{/updateStudentFE/{rno} (rno=${student.rno})}" th:object = "${student}" method="POST">
+						<div class="form-group">
+							<label> Student First Name </label>
+							<input type="text" name="firstName" th:field="*{firstName}" class="form-control"
+								placeholder="Enter First Name" />
+						</div>
+
+						<div class="form-group">
+							<label> Student Last Name </label>
+							<input type="text" name="lastName" th:field="*{lastName}" class="form-control"
+								placeholder="Enter Last Name" />
+						</div>
+
+						<div class="form-group">
+							<label> Customer Email </label>
+							<input type="text" name="email" th:field="*{email}" class="form-control"
+								placeholder="Enter Email" />
+						</div>
+
+						<div class="form-group">
+							<label> Student Percentage </label>
+							<input type="text" name="percentage" th:field="*{percentage}" class="form-control"
+								placeholder="Enter Percentage" />
+						</div>
+						<div class="form-group">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="pathogens1" th:field="*{gender}"
+									value="Male">
+								<label class="custom-control-label" for="pathogens1">Male</label>
+							</div>
+
+							<div class="custom-control custom-radio custom-control-inline">
+								<input type="radio" class="custom-control-input" id="pathogens2" th:field="*{gender}"
+									value="Female" checked="checked">
+								<label class="custom-control-label" for="pathogens2">Female</label>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label>Student Date of Birth</label>
+							<input type="date" name="dob" th:field="*{dob}" class="form-control"
+								placeholder="Select Date of Birth" />
+						</div>
+
+						
+						<div class = "box-footer">
+							<button type="submit" class = "btn btn-primary">
+								Submit
+							</button>
+						</div>
+					</form>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

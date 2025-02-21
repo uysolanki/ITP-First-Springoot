@@ -1,6 +1,7 @@
 package com.itp.ITPFirstSpringboot.service;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Objects;
 
@@ -65,11 +66,20 @@ public class StudentService {
 //		if(newDetails.getLastName()!=null)
 //		studentFromDb.setLastName(newDetails.getLastName());
 //		
+		LocalDate today=LocalDate.now();
+		LocalDate dob1=newDetails.getDob();
+		
+		Period period = Period.between(dob1, today);
+        int age1 = period.getYears(); 
 		
 		studentFromDb.setEmail(Objects.requireNonNullElse(newDetails.getEmail(),studentFromDb.getEmail()));
-		studentFromDb.setAge(Objects.requireNonNullElse(newDetails.getAge(),0));
 		studentFromDb.setFirstName(Objects.requireNonNullElse(newDetails.getFirstName(),studentFromDb.getFirstName()));
 		studentFromDb.setLastName(Objects.requireNonNullElse(newDetails.getLastName(),studentFromDb.getLastName()));
+		studentFromDb.setAge(age1);
+		studentFromDb.setDob(Objects.requireNonNullElse(newDetails.getDob(),studentFromDb.getDob()));
+		studentFromDb.setGender(Objects.requireNonNullElse(newDetails.getGender(),studentFromDb.getGender()));
+		studentFromDb.setPercentage(Objects.requireNonNullElse(newDetails.getPercentage(),studentFromDb.getPercentage()));
+		
 		
 		return saveStudent(studentFromDb);
 	}

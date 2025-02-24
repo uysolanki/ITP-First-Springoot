@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itp.ITPFirstSpringboot.entity.Student;
 import com.itp.ITPFirstSpringboot.service.StudentService;
 
-import io.swagger.v3.oas.annotations.Operation;
+//import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 public class StudentController {
@@ -42,7 +42,7 @@ public class StudentController {
 	
 	private static final Logger logger=Logger.getLogger(StudentController.class);
 
-	@Operation(summary = "Sample API", description = "Hello World")
+	//@Operation(summary = "Sample API", description = "Hello World")
 	@RequestMapping("/welcome")
 	public String welcome()
 	{
@@ -69,7 +69,7 @@ public class StudentController {
 		return s1;
 	}
 	
-	@Operation(summary = "Get List Of all Students", description = "Get List of All Students")
+	//@Operation(summary = "Get List Of all Students", description = "Get List of All Students")
 	@RequestMapping("/getStudentList")
 	public List<Student> getStudentList()
 	{

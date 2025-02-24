@@ -1,22 +1,19 @@
 package com.itp.ITPFirstSpringboot.controller;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itp.ITPFirstSpringboot.entity.Student;
 import com.itp.ITPFirstSpringboot.service.StudentService;
@@ -43,7 +40,7 @@ public class StudentControllerFE {
 		return "studentlist";
 	}
 	
-	@RequestMapping("/registerRegister")
+	@RequestMapping("/registerStudent")
 	public String registerRegister(Model model)
 	{
 		Student s=new Student();
@@ -106,4 +103,23 @@ public class StudentControllerFE {
 		return "myerrors";
 		}
 	}
+	
+	@RequestMapping(value = "/403")
+	public ModelAndView accesssDenied(Principal user) {
+
+		ModelAndView model = new ModelAndView();
+
+		if (user != null) {
+			model.addObject("msg", "Hi " + user.getName() 
+			+ ", you do not have permission to access this page!");
+		} else {
+			model.addObject("msg", 
+			    "you do not have permission to access this page!");
+		}
+
+		model.setViewName("403");
+		return model;
+
+	}
+
 }

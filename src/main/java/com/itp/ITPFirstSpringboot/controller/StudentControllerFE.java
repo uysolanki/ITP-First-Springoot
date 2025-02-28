@@ -50,7 +50,7 @@ public class StudentControllerFE {
 	
 	
 	@PostMapping("/saveStudent")
-	public String saveStudentUsingRequestBody(@ModelAttribute Student s1)
+	public String saveStudentUsingRequestBody(@ModelAttribute Student s1,Model model)
 	{		
 		  logger.info("Request Received to Add Student " +s1.getFirstName());
 		  long st=System.currentTimeMillis();
@@ -71,6 +71,7 @@ public class StudentControllerFE {
 				
 			} catch (Exception e) {
 				logger.warn("Unable to Add Student " +s1.getFirstName() + e.getLocalizedMessage());
+				model.addAttribute("errorMessage",e.getMessage());
 				return "myerrors";
 			}	
 	}

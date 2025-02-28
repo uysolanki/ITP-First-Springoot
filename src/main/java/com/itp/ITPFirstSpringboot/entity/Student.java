@@ -18,6 +18,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -64,6 +65,7 @@ public class Student {
 	@Past
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "Date Of Birth cannot be null") 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	LocalDate dob;
 	
 	

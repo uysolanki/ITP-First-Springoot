@@ -62,21 +62,21 @@
 						<div class="form-group">
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" class="custom-control-input" id="pathogens1" th:field="*{gender}"
-									value="Male">
+									value="male">
 								<label class="custom-control-label" for="pathogens1">Male</label>
 							</div>
 
 							<div class="custom-control custom-radio custom-control-inline">
 								<input type="radio" class="custom-control-input" id="pathogens2" th:field="*{gender}"
-									value="Female" checked="checked">
+									value="female" checked="checked">
 								<label class="custom-control-label" for="pathogens2">Female</label>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label>Student Date of Birth</label>
-							<input type="date" name="dob" th:field="*{dob}" class="form-control"
-								placeholder="Select Date of Birth" />
+							<input type="date" name="dob" th:field="*{dob}"
+							th:value="${#temporals.format(student.dob, 'yyyy-MM-dd')}" class="form-control" />
 						</div>
 
 						<div class="box-footer">
